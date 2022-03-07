@@ -120,6 +120,33 @@ $ source /tmp/sc.env
 $ sc
 ```
 
+## Using external proxy on the host
+
+```sh
+$ export SAUCE_USERNAME="my-user"
+$ export SAUCE_ACCESS_KEY="my-access-key"
+docker run \
+    -e SAUCE_USERNAME=${SAUCE_USERNAME} \
+    -e SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+    --network="host" \
+    -it saucelabs/sauce-connect:4.8.0 \
+    --proxy host.docker.internal:8081
+```
+
+For linux:
+
+```sh
+$ export SAUCE_USERNAME="my-user"
+$ export SAUCE_ACCESS_KEY="my-access-key"
+docker run \
+    -e SAUCE_USERNAME=${SAUCE_USERNAME} \
+    -e SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+    --network="host" \
+    --add-host=host.docker.internal:host-gateway \
+    -it saucelabs/sauce-connect:4.8.0 \
+    --proxy host.docker.internal:8081
+```
+
 ## CI Example
 
 If you want to run this Docker image as part of your CI/CD pipeline, you can run the following steps:
